@@ -14,6 +14,19 @@ async function main() {
         endsAt: dayjs().add(21, "days").toDate(),
       },
     });
+
+  }
+
+  let ticketType = await prisma.ticketType.findFirst();
+  if (!ticketType) {
+    ticketType = await prisma.ticketType.create({
+      data: {
+        "name": "tipo1",         
+        "price": 22,         
+        "isRemote": true,      
+        "includesHotel": true 
+      }
+    })
   }
 
   console.log({ event });
