@@ -10,7 +10,7 @@ async function createNewTicket(ticketTypeId: number, userId: number) {
   console.log("antes do enrollment no service");
   const idEnrollmentByUserId = await enrollmentRepository.findWithAddressByUserId(userId); 
   if(!idEnrollmentByUserId) {
-    throw notFoundError();
+    throw notFoundError(); 
   }
 
   console.log("antes do ticketType no service");

@@ -2,14 +2,12 @@ import { prisma } from "@/config";
 import { Ticket } from "@prisma/client";
 
 async function createNewTicket(ticket: CreateTicket) {
-  console.log("funcao create tickect no repository");
   console.log(ticket);
   const resolve = await prisma.ticket.upsert({
     where: { id: ticket.id || 0 },
     create: ticket as CreateNewTicketParams,
     update: ticket
   });
-  console.log(resolve);
   return resolve;
 }
 
@@ -39,6 +37,12 @@ async function getUserTickets(enrollmentId: number) {
   });
 }
 
+async function getTicketsById(tickectId: number) {
+  return prisma.ticket.findFirst({
+    where: { id: tickectId }
+  });
+}
+
 export type CreateTicket = Partial<Ticket>;
 export type CreateNewTicketParams = Omit<Ticket, "id" | "createdAt" | "updatedAt">;
 
@@ -47,7 +51,8 @@ const ticketRepository = {
   getTicketByEnrollmentId,
   getTicketTypeById,
   getAllTicketTypes,
-  getUserTickets
+  getUserTickets,
+  getTicketsById
 };
 
 export default ticketRepository;

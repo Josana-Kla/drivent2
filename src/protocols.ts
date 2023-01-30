@@ -28,3 +28,11 @@ export type RequestError = {
   name: string,
   message: string,
 };
+
+export type CardDataInput = {
+  issuer: string,
+  number: string,
+  name: string,
+  expirationDate: Date | string,
+  cvv: number
+};
